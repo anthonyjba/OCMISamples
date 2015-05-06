@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="assets/css/bootstrap.css" media="screen">
-    <link rel="stylesheet" href="assets/css/bootswatch.min.css">
+    <link rel="stylesheet" href="assets/css/bootswatch.min.css">      
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
@@ -15,10 +15,12 @@
 
   </head>
   <body>
+    
+    <div id="map" style="width: 100%; height: 100%; position: absolute;  top: 0;left: 0;  z-index: 0;"></div>
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../" class="navbar-brand">Bootswatch</a>
+          <a href="../" class="navbar-brand">Analiza Rústica</a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -28,34 +30,17 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Capas Base <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="../default/">Default</a></li>
+                <li><a href="../default/">OSM</a></li>
                 <li class="divider"></li>
-                <li><a href="../cerulean/">Cerulean</a></li>
-                <li><a href="../cosmo/">Cosmo</a></li>
-                <li><a href="../cyborg/">Cyborg</a></li>
-                <li><a href="../darkly/">Darkly</a></li>
-                <li><a href="../flatly/">Flatly</a></li>
-                <li><a href="../journal/">Journal</a></li>
-                <li><a href="../lumen/">Lumen</a></li>
-                <li><a href="../paper/">Paper</a></li>
-                <li><a href="../readable/">Readable</a></li>
-                <li><a href="../sandstone/">Sandstone</a></li>
-                <li><a href="../simplex/">Simplex</a></li>
-                <li><a href="../slate/">Slate</a></li>
-                <li><a href="../spacelab/">Spacelab</a></li>
-                <li><a href="../superhero/">Superhero</a></li>
-                <li><a href="../united/">United</a></li>
-                <li><a href="../yeti/">Yeti</a></li>
+                <li><a href="../cerulean/">CATRASTRO</a></li>
+                <li><a href="../cosmo/">PNOA</a></li>                
               </ul>
             </li>
             <li>
               <a href="../help/">Help</a>
-            </li>
-            <li>
-              <a href="http://news.bootswatch.com">Blog</a>
-            </li>
+            </li>            
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="download">
@@ -63,17 +48,19 @@
                 <li><a href="./bootstrap.css">bootstrap.css</a></li>
                 <li class="divider"></li>
                 <li><a href="./variables.less">variables.less</a></li>
-                <li><a href="./bootswatch.less">bootswatch.less</a></li>
-                <li class="divider"></li>
-                <li><a href="./_variables.scss">_variables.scss</a></li>
-                <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li>
+                <li><a href="./bootswatch.less">bootswatch.less</a></li>               
               </ul>
             </li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
-            <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+            <li>
+              <form class="navbar-form navbar-left" role="search" onsubmit="return false;">
+                  <div class="form-group">
+                      <input type="text" id="search-input" name="search-input" class="form-control" placeholder="Buscar" autocomplete="off">
+                  </div>
+              </form>
+            </li>
           </ul>
 
         </div>
@@ -98,7 +85,7 @@
       </div>
 
       <footer>
-        hola
+        hola pepito
 
       </footer>
 
@@ -109,5 +96,18 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/bootswatch.js"></script>
+    <script src="assets/js/ol-debug.js"></script>
+    <script>
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({source: new ol.source.OSM()})
+        ],
+        view: new ol.View({
+          center: ol.proj.transform([-3.703790199999957600, 40.416775400000000000], 'EPSG:4326', 'EPSG:3857'),
+          zoom: 6
+        }),
+        target: 'map'
+      });
+    </script>
 </body>
 </html>
