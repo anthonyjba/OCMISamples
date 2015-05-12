@@ -31,11 +31,13 @@
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Capas Base <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="themes">
+              <ul class="dropdown-menu" aria-labelledby="themes" id="base-layer-list">
+<!--
                 <li><a href="javascript:void(0)" onclick="setBaseLayer('OSM')">OSM</a></li>
                 <li class="divider"></li>
                 <li><a href="javascript:void(0)" onclick="setBaseLayer('PNOA')">PNOA</a></li>
                 <li><a href="javascript:void(0)" onclick="setBaseLayer('CATASTRO')">CATASTRO</a></li>                
+-->
               </ul>
             </li>
             <li>
@@ -77,9 +79,7 @@
             <p class="lead">Light and shadow</p>
           </div>
           <div class="col-lg-4 col-md-5 col-sm-6">
-            <div class="sponsor">
-              <a href="http://www.shopify.com/?ref=bootswatch" target="_blank" onclick="_gaq.push(['_trackEvent', 'banner', 'click', 'shopify']);"><img src="../assets/img/shopify.png" alt="Shopify" onload="_gaq.push(['_trackEvent', 'banner', 'impression', 'shopify']);"></a>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -97,72 +97,8 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/bootswatch.js"></script>
     <script src="assets/js/ol-debug.js"></script>
-    <script src="//maps.google.com/maps/api/js?v=3&sensor=false&libraries=places" type="text/javascript"></script>
-    <script>
-      function getMTNRaster() {
-          return new ol.source.TileWMS({
-                  url: 'http://www.idee.es/wms/MTN-Raster/MTN-Raster',
-                  params: {
-                      'LAYERS': 'mtn_rasterizado',
-                      'TRANSPARENT': 'true'
-                  }
-              });
-      }
-      
-      
-      var capasBase = [ {id: 'OSM', capa: new ol.source.OSM() }, 
-          {id: 'PNOA', capa : getMTNRaster()}
-        ];
-
-      var layers = [];
-      var i, ii;
-      for (i = 0, ii = capasBase.length; i < ii; ++i) {
-        layers.push(new ol.layer.Tile({
-        visible: false,
-        preload: Infinity,
-        source: capasBase[i].capa
-      }));
-
-      }
-
-/*
- [
-          new ol.layer.Tile({source: new ol.source.OSM()}),
-          new ol.layer.Tile({
-              source: getMTNRaster(),
-              maxResolution: 500
-          })
-        ]
-*/
-
-      var map = new ol.Map({
-        layers: layers,
-        loadTilesWhileInteracting: true,
-        target: 'map',
-        renderer: 'canvas', // Force the renderer to be used
-        controls: ol.control.defaults(),
-        view: new ol.View({
-          center: ol.proj.transform([-3.703790199999957600, 40.416775400000000000], 'EPSG:4326', 'EPSG:3857'),
-          zoom: 6
-        })
-      });
-      
-      function setBaseLayer(capa) {
-        for (var i = 0, ii = layers.length; i < ii; ++i) {
-          alert(capasBase[i].id);
-          layers[i].setVisible(capasBase[i].id === capa);
-        }
-
-      }
-     setBaseLayer('OSM');
-
-      var view = map.getView();
-            view.on('change:resolution', function(evt) {
-                console.log("resolution", view.getResolution());
-            });
-            
-    
-    </script>
+<!--    <script src="//maps.google.com/maps/api/js?v=3&sensor=false&libraries=places" type="text/javascript"></script>-->
+    <script src="assets/app/main.js"></script>
     
 </body>
 </html>
