@@ -6,13 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="assets/css/bootstrap.css" media="screen">
-    <link rel="stylesheet" href="assets/css/bootswatch.min.css">      
+    <link rel="stylesheet" href="assets/css/bootswatch.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.5.0/ol.css" type="text/css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
       <script src="../bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
 
+      
+      
+    <style>
+    /**
+     * The zoomslider in the second map shall be placed between the zoom-in and
+     * zoom-out buttons.
+     */
+    #map .ol-zoom .ol-zoom-out {
+      margin-top:204px;
+    }
+    #map .ol-zoomslider {
+      background-color: transparent;
+      top: 2.3em;
+    }
+
+    #map .ol-touch .ol-zoom .ol-zoom-out {
+      margin-top: 212px;
+    }
+    #map .ol-touch .ol-zoomslider {
+      top: 300px; //2.75em;
+    }
+
+    #map .ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
+    #map .ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
+      top: 103px;
+    }
+
+    #map .ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
+    #map .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
+      top: 332px;
+    }
+        </style>
   </head>
   <body>
     

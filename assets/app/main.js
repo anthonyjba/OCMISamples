@@ -1,32 +1,35 @@
 (function (){
     
-    function getMTNRaster() {
-          return new ol.source.TileWMS({
-                  url: 'http://www.idee.es/wms/MTN-Raster/MTN-Raster',
-                  params: {
-                      'LAYERS': 'mtn_rasterizado',
-                      'TRANSPARENT': 'true'
-                  }
-              });
-      }
+function getMTNRaster() {
+  return new ol.source.TileWMS({
+          url: 'http://www.idee.es/wms/MTN-Raster/MTN-Raster',
+          params: {
+              'LAYERS': 'mtn_rasterizado',
+              'TRANSPARENT': 'true'
+          }
+      });
+}
     
-    function getBingMaps(style){
-        return new ol.source.BingMaps({
-          key: 'Ak-dzM4wZjSqTlzveKz5u0d4IQ4bRzVI309GxmkgSVr1ewS6iPSrOvOKhA-CJlm3',
-          imagerySet: style
-          // use maxZoom 19 to see stretched tiles instead of the BingMaps
-          // "no photos at this zoom level" tiles
-          // maxZoom: 19
-        })
-
-    }
+function getBingMaps(style){
+    return new ol.source.BingMaps({
+      key: 'Ak-dzM4wZjSqTlzveKz5u0d4IQ4bRzVI309GxmkgSVr1ewS6iPSrOvOKhA-CJlm3',
+      imagerySet: style
+      // use maxZoom 19 to see stretched tiles instead of the BingMaps
+      // "no photos at this zoom level" tiles
+      // maxZoom: 19
+    })
+}
+    
+//    url: 'http://www.ign.es/wmts/pnoa-ma', layer: 'OI.OrthoimageCoverage',
+//        http://www.ign.es/wmts/pnoa-ma?Layer=OI.OrthoimageCoverage&Style=default&TileMatrixSet=EPSG:3857&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/png&TileMatrix=4&TileCol=7&TileRow=6
       
       
-      var capasBase = [ 
-          {id: 'OSM', capa: new ol.source.OSM() },
-          {id: 'BingMap', capa: getBingMaps('Road') },             
-          {id: 'PNOA', capa : getMTNRaster()}
-        ];
+    var capasBase = [ 
+      {id: 'OSM', capa: new ol.source.OSM() },
+      {id: 'BingMap', capa: getBingMaps('Road') },             
+      {id: 'PNOA', capa : getMTNRaster()}
+    ];
+    
     window.setBaseLayers = capasBase;
 
       var layers = [];
@@ -65,6 +68,9 @@
           zoom: 6
         })
       });
+    
+    var zoomslider = new ol.control.ZoomSlider();
+    map.addControl(zoomslider);
       
     window.setBaseLayer = function(capa) {
         for (var i = 0, ii = layers.length; i < ii; ++i) {
